@@ -1,0 +1,15 @@
+services:
+  mymeeting:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      WHISPER_MODEL: base
+      NOTES_MODEL: Qwen/Qwen2.5-1.5B-Instruct
+    volumes:
+      - ./data:/app/data                    # notes database and uploaded recordings
+      - hf-cache:/app/.cache/huggingface    # downloaded models, kept between runs
+    restart: unless-stopped
+
+volumes:
+  hf-cache:
